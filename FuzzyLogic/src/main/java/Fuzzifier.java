@@ -137,4 +137,18 @@ public class Fuzzifier {
         }
         return result;
     }
+    
+    public float[] getArgs()
+    {
+       return args;
+    }
+    
+    public String getName()
+    {
+        return name;
+    }
+    public String getType()
+    {
+        return type;
+    }
 }
