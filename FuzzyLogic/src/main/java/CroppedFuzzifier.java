@@ -10,21 +10,26 @@
  */
 public class CroppedFuzzifier extends Fuzzifier{
     
-    private float limit;
+    private double limit;
     
-    public CroppedFuzzifier(String name, String type, float[] args, float limit) {
+    public CroppedFuzzifier(String name, String type, double[] args, double limit) {
         super(name, type, args);
         this.limit = limit;
     }
     
     @Override
-    public float fuzzify(float input)
+    public double fuzzify(double input)
     {
-        float result = super.fuzzify(input);
+        double result = super.fuzzify(input);
         if(result>limit)
         {
             result = limit;
         }
         return result;
+    }
+    
+    public double getLimit()
+    {
+        return limit;
     }
 }

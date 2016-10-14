@@ -11,9 +11,9 @@
 public class Fuzzifier {
     private String name;
     private String type;
-    private float[] args;
+    private double[] args;
     private boolean setup;
-    public Fuzzifier(String name,String type,float[] args)
+    public Fuzzifier(String name,String type,double[] args)
     {
         this.name = name;
         if(verifyType(type))
@@ -32,7 +32,7 @@ public class Fuzzifier {
         
     }
     
-    public boolean verifyArgs(float[] args)
+    public boolean verifyArgs(double[] args)
     {
         boolean result = false;
         if(type == "trimf")
@@ -68,9 +68,9 @@ public class Fuzzifier {
         return result;
     }
     
-    public float fuzzify(float input)
+    public double fuzzify(double input)
     {
-        float result = 0;
+        double result = 0;
         if(type == "trimf")
         {
             result = trimFuzz(input);
@@ -83,11 +83,11 @@ public class Fuzzifier {
         return result;
     }
     
-    public float trimFuzz(float input)
+    public double trimFuzz(double input)
     {
-        float result = 0;
-        float line1 = lineMem(input,args[0],args[1],true);
-        float line2 = lineMem(input,args[1],args[2],false);
+        double result = 0;
+        double line1 = lineMem(input,args[0],args[1],true);
+        double line2 = lineMem(input,args[1],args[2],false);
         result = line1;
         if(line1>line2)
         {
@@ -100,12 +100,12 @@ public class Fuzzifier {
         return result;
     }
     
-    public float trapFuzz(float input)
+    public double trapFuzz(double input)
     {
-        float result = 0;
-        float line1 = lineMem(input,args[0],args[1],true);
-        float line2 = (float)1.0;
-        float line3 = lineMem(input,args[2],args[3],false);
+        double result = 0;
+        double line1 = lineMem(input,args[0],args[1],true);
+        double line2 = (double)1.0;
+        double line3 = lineMem(input,args[2],args[3],false);
         result = line2;
         if(result>line1)
         {
@@ -122,11 +122,11 @@ public class Fuzzifier {
         return result;
     }
     
-    public float lineMem(float input, float arg1, float arg2,boolean positive)
+    public double lineMem(double input, double arg1, double arg2,boolean positive)
     {
-        float result = 0;
+        double result = 0;
         
-        float x = 1/(arg2-arg1);
+        double x = 1/(arg2-arg1);
         if(positive)
         {
             result = (input-arg1)*x;
@@ -138,7 +138,7 @@ public class Fuzzifier {
         return result;
     }
     
-    public float[] getArgs()
+    public double[] getArgs()
     {
        return args;
     }

@@ -22,14 +22,14 @@ public class FuzzyMem {
         fuzzifiers = new ArrayList<>();
     }
     
-    public void addFuzzifier(String name,String type,float[] args)
+    public void addFuzzifier(String name,String type,double[] args)
     {
         fuzzifiers.add(new Fuzzifier(name,type,args));
     }
     
-    public float[] fuzzify(float input)
+    public double[] fuzzify(double input)
     {
-        float[] result = new float[fuzzifiers.size()];
+        double[] result = new double[fuzzifiers.size()];
         for(int i = 0;i<fuzzifiers.size();i++)
         {
             result[i] = fuzzifiers.get(i).fuzzify(input);
@@ -37,9 +37,12 @@ public class FuzzyMem {
         return result;
     }
     
+    public Fuzzifier getFuzzifier(int i)
+    {
+        return fuzzifiers.get(i);
+    }
     
-    
-    public ArrayList<CroppedFuzzifier> getFuzzyMembership(float input)
+    public ArrayList<CroppedFuzzifier> getFuzzyMembership(double input)
     {
         ArrayList<CroppedFuzzifier> result = new ArrayList<>();
         for(int i = 0;i<fuzzifiers.size();i++)
@@ -52,28 +55,5 @@ public class FuzzyMem {
         return result;
     }
     
-    public float sampleDist(int count, ArrayList<Fuzzifier> fuzzies)
-    {
-        float result = 0;
-        float start = fuzzies.get(0).getArgs()[0];
-        int argPos = fuzzies.get(fuzzies.size()-1).getArgs().length;
-        float end = fuzzies.get(fuzzies.size()-1).getArgs()[argPos];
-        float total= start-end;
-        float stepLen = total/count;
-        for(int i = 0;i<count;i++)
-        {
-            float temp = 0;
-            float input = stepLen*count;
-            for(Fuzzifier fuzz:fuzzies)
-            {
-                float temp2 = fuzz.fuzzify(input);
-                if(temp2>temp)
-                {
-                    temp = temp2;
-                }
-            }
-            result += temp;
-        }
-        return result;
-    }
+    
 }
