@@ -1,0 +1,3 @@
+To change the input values, locate them at the top of the main class (marketValueInput & locationInput).
+The output is printed to the console
+the FuzzyLogic folder is a netbeans maven project
